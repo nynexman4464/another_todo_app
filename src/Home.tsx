@@ -1,17 +1,18 @@
-import { Routes, Route, Link } from "react-router-dom";
-import { Button } from "@astryxdesign/core";
+import { Button } from "@astryxdesign/core/Button";
+import { Heading } from "@astryxdesign/core/Heading";
+import { Text } from "@astryxdesign/core/Text";
+import { VStack } from "@astryxdesign/core/VStack";
 
 export const Home = () => {
   return (
-    <>
-      <section>
-        <h1>Home</h1>
-        <p>TODO!</p>
-        <Button label="Click Me!"/>
-      </section>
-      <nav>
-        <Link to="/about">About</Link>
-      </nav>
-    </>
+    <VStack as="section" gap={4} hAlign="start">
+      <VStack gap={1}>
+        <Heading level={1}>Home</Heading>
+        <Text as="p" color="secondary">
+          TODO!
+        </Text>
+      </VStack>
+      <Button label="Click Me!" />
+    </VStack>
   );
 };
