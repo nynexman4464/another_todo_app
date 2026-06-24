@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@astryxdesign/cli": "^0.1.0",
+    "@astryxdesign/core": "^0.1.0",
+    "@astryxdesign/theme-neutral": "^0.1.0",
+    "@astryxdesign/theme-y2k": "^0.1.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.0"
