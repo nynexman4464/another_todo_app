@@ -3,6 +3,7 @@ import { Heading } from "@astryxdesign/core/Heading";
 import { StackItem } from "@astryxdesign/core/Stack";
 import { Text } from "@astryxdesign/core/Text";
 import { VStack } from "@astryxdesign/core/VStack";
+import { useTranslator } from "@astryxdesign/core/i18n";
 import { TodoControls } from "./TodoControls";
 import { TodoList } from "./TodoList";
 import { TodoPowerSearch } from "./TodoPowerSearch";
@@ -14,6 +15,7 @@ import {
 } from "./todos";
 
 export const Home = () => {
+  const t = useTranslator();
   const [todos, dispatch] = useTodoState();
   const [filterMode, setFilterMode] = useState<TodoFilterMode>("all");
   const [sortMode, setSortMode] = useState<TodoSortMode>("newest");
@@ -38,12 +40,12 @@ export const Home = () => {
   return (
     <VStack as="section" gap={5} hAlign="start">
       <VStack gap={1} width="100%">
-        <Heading level={1}>Todos</Heading>
+        <Heading level={1}>{t("@app.home.heading")}</Heading>
         <Text as="p" color="secondary">
-          Track open work, update it inline, and filter the list without leaving the page.
+          {t("@app.home.subtitle")}
         </Text>
         <Text as="p" color="secondary" type="supporting">
-          {openCount} open of {todos.length} total
+          {t("@app.home.counts", { open: openCount, total: todos.length })}
         </Text>
       </VStack>
 

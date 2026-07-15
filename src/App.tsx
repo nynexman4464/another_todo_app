@@ -8,6 +8,7 @@ import { NavIcon } from "@astryxdesign/core/NavIcon";
 import { SideNav, SideNavItem, SideNavSection } from "@astryxdesign/core/SideNav";
 import { TopNav, TopNavHeading } from "@astryxdesign/core/TopNav";
 import { VStack } from "@astryxdesign/core/VStack";
+import { useTranslator } from "@astryxdesign/core/i18n";
 import { Home } from "./Home";
 import { About } from "./About";
 import { LocalePicker } from "./i18n/LocalePicker";
@@ -20,19 +21,20 @@ const RouterLink = forwardRef<HTMLAnchorElement, RouterLinkProps>(
   ({ href = "/", ...props }, ref) => <Link ref={ref} to={href} {...props} />,
 );
 
-const homeNavItem = { href: "/", label: "Home", icon: "check" } as const;
-const aboutNavItem = { href: "/about", label: "About", icon: "info" } as const;
-
 function App() {
+  const t = useTranslator();
   const { pathname } = useLocation();
+
+  const homeNavItem = { href: "/", label: t("@app.nav.home"), icon: "check" } as const;
+  const aboutNavItem = { href: "/about", label: t("@app.nav.about"), icon: "info" } as const;
 
   const topNav = (
     <TopNav
-      label="Primary"
+      label={t("@app.nav.primaryLabel")}
       heading={
         <TopNavHeading
           as={RouterLink}
-          heading="Another Todo"
+          heading={t("@app.appName")}
           headingHref="/"
           logo={<NavIcon icon={<Icon icon="check" />} />}
         />
@@ -44,7 +46,7 @@ function App() {
   const sideNav = (
     <SideNav>
       <VStack height="100%" justify="between">
-        <SideNavSection title="Pages" isHeaderHidden>
+        <SideNavSection title={t("@app.nav.sectionPages")} isHeaderHidden>
           <SideNavItem
             as={RouterLink}
             href={homeNavItem.href}
@@ -54,7 +56,7 @@ function App() {
             selectedIcon={homeNavItem.icon}
           />
         </SideNavSection>
-        <SideNavSection title="More" isHeaderHidden>
+        <SideNavSection title={t("@app.nav.sectionMore")} isHeaderHidden>
           <SideNavItem
             as={RouterLink}
             href={aboutNavItem.href}

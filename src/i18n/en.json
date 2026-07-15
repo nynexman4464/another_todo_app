@@ -1,0 +1,56 @@
+{
+  "@app.appName": { "defaultMessage": "Another Todo" },
+  "@app.nav.primaryLabel": { "defaultMessage": "Primary" },
+  "@app.nav.sectionPages": { "defaultMessage": "Pages" },
+  "@app.nav.sectionMore": { "defaultMessage": "More" },
+  "@app.nav.home": { "defaultMessage": "Home" },
+  "@app.nav.about": { "defaultMessage": "About" },
+  "@app.locale.pickerLabel": { "defaultMessage": "Language" },
+
+  "@app.home.heading": { "defaultMessage": "Todos" },
+  "@app.home.subtitle": { "defaultMessage": "Track open work, update it inline, and filter the list without leaving the page." },
+  "@app.home.counts": { "defaultMessage": "{open, number} open of {total, number} total" },
+
+  "@app.controls.newTodoLabel": { "defaultMessage": "New todo" },
+  "@app.controls.newTodoPlaceholder": { "defaultMessage": "Add a new todo" },
+  "@app.controls.addTodo": { "defaultMessage": "Add todo" },
+  "@app.controls.filterLabel": { "defaultMessage": "Filter todos" },
+  "@app.controls.filter.all": { "defaultMessage": "All" },
+  "@app.controls.filter.open": { "defaultMessage": "Open" },
+  "@app.controls.filter.closed": { "defaultMessage": "Closed" },
+  "@app.controls.sortLabel": { "defaultMessage": "Sort todos" },
+  "@app.controls.sort.newest": { "defaultMessage": "Newest created" },
+  "@app.controls.sort.oldest": { "defaultMessage": "Oldest created" },
+  "@app.controls.sort.updated": { "defaultMessage": "Recently updated" },
+
+  "@app.list.emptyHeading": { "defaultMessage": "No todos yet" },
+  "@app.list.emptyBody": { "defaultMessage": "Add your first item above to start tracking work." },
+  "@app.list.noMatchHeading": { "defaultMessage": "Nothing matches this filter" },
+  "@app.list.noMatchBody": { "defaultMessage": "Switch the filter or add a new todo." },
+
+  "@app.item.markComplete": { "defaultMessage": "Mark \"{title}\" complete" },
+  "@app.item.edit": { "defaultMessage": "Edit \"{title}\"" },
+  "@app.item.editTooltip": { "defaultMessage": "Edit" },
+  "@app.item.delete": { "defaultMessage": "Delete \"{title}\"" },
+  "@app.item.deleteTooltip": { "defaultMessage": "Delete" },
+  "@app.item.deleteConfirmTitle": { "defaultMessage": "Delete todo" },
+  "@app.item.deleteConfirmAction": { "defaultMessage": "Delete todo" },
+  "@app.item.deleteConfirmDescription": { "defaultMessage": "Delete \"{title}\"? This cannot be undone." },
+  "@app.item.save": { "defaultMessage": "Save" },
+  "@app.item.cancel": { "defaultMessage": "Cancel" },
+  "@app.item.created": { "defaultMessage": "Created" },
+  "@app.item.updated": { "defaultMessage": "Updated" },
+
+  "@app.validation.blankTitle": { "defaultMessage": "Todo titles cannot be blank." },
+
+  "@app.powersearch.title": { "defaultMessage": "Title" },
+  "@app.powersearch.status": { "defaultMessage": "Status" },
+  "@app.powersearch.created": { "defaultMessage": "Created" },
+  "@app.powersearch.statusOpen": { "defaultMessage": "Open" },
+  "@app.powersearch.statusClosed": { "defaultMessage": "Closed" },
+
+  "@app.about.heading": { "defaultMessage": "About" },
+  "@app.about.body": { "defaultMessage": "A toy todo app for testing UI frameworks." },
+  "@app.about.repoLink": { "defaultMessage": "GitHub repository" },
+  "@app.about.copyright": { "defaultMessage": "Copyright © 2026, nynexman4464" }
+}

@@ -11,6 +11,7 @@ import { StackItem } from "@astryxdesign/core/Stack";
 import { Text } from "@astryxdesign/core/Text";
 import { TextInput } from "@astryxdesign/core/TextInput";
 import { Timestamp } from "@astryxdesign/core/Timestamp";
+import { useTranslator } from "@astryxdesign/core/i18n";
 import { getTodoTitleValidationMessage, type Todo } from "./todos";
 
 function PencilIcon(props: SVGProps<SVGSVGElement>) {
@@ -74,6 +75,7 @@ type TodoItemProps = {
 };
 
 export function TodoItem({ onDelete, onRename, onToggleDone, todo }: TodoItemProps) {
+  const t = useTranslator();
   const [isEditing, setIsEditing] = useState(false);
   const [editingTitle, setEditingTitle] = useState("");
   const [editingError, setEditingError] = useState<string | null>(null);
@@ -92,7 +94,7 @@ export function TodoItem({ onDelete, onRename, onToggleDone, todo }: TodoItemPro
   }
 
   function saveEditingTodo() {
-    const validationMessage = getTodoTitleValidationMessage(editingTitle);
+    const validationMessage = getTodoTitleValidationMessage(editingTitle, t);
 
     if (validationMessage) {
       setEditingError(validationMessage);
@@ -117,14 +119,14 @@ export function TodoItem({ onDelete, onRename, onToggleDone, todo }: TodoItemPro
 
   function requestDelete() {
     deleteDialog.show({
-      actionLabel: "Delete todo",
-      description: `Delete "${todo.title}"? This cannot be undone.`,
+      actionLabel: t("@app.item.deleteConfirmAction"),
+      description: t("@app.item.deleteConfirmDescription", { title: todo.title }),
       onAction: () => {
         onDelete(todo.id);
         resetEditingState();
         deleteDialog.hide();
       },
-      title: "Delete todo",
+      title: t("@app.item.deleteConfirmTitle"),
     });
   }
 
@@ -133,7 +135,7 @@ export function TodoItem({ onDelete, onRename, onToggleDone, todo }: TodoItemPro
       <CheckboxInput
         className="todo-card-checkbox"
         isLabelHidden
-        label={`Mark ${todo.title} complete`}
+        label={t("@app.item.markComplete", { title: todo.title })}
         onChange={(isDone) => onToggleDone(todo.id, isDone)}
         size="sm"
         value={todo.isDone}
@@ -161,7 +163,7 @@ export function TodoItem({ onDelete, onRename, onToggleDone, todo }: TodoItemPro
               <TextInput
                 hasAutoFocus
                 isLabelHidden
-                label={`Edit ${todo.title}`}
+                label={t("@app.item.edit", { title: todo.title })}
                 onChange={(value) => {
                   setEditingTitle(value);
                   if (editingError) {
@@ -172,8 +174,8 @@ export function TodoItem({ onDelete, onRename, onToggleDone, todo }: TodoItemPro
                 value={editingTitle}
               />
             </StackItem>
-            <Button label="Save" type="submit" variant="primary" />
-            <Button label="Cancel" onClick={resetEditingState} variant="ghost" />
+            <Button label={t("@app.item.save")} type="submit" variant="primary" />
+            <Button label={t("@app.item.cancel")} onClick={resetEditingState} variant="ghost" />
           </HStack>
         </form>
       ) : (
@@ -204,18 +206,18 @@ export function TodoItem({ onDelete, onRename, onToggleDone, todo }: TodoItemPro
           <HStack className="todo-card-actions" gap={1} vAlign="center" wrap="wrap">
             <IconButton
               icon={<Icon icon={PencilIcon} />}
-              label={`Edit ${todo.title}`}
+              label={t("@app.item.edit", { title: todo.title })}
               onClick={startEditing}
               size="sm"
-              tooltip="Edit"
+              tooltip={t("@app.item.editTooltip")}
               variant="ghost"
             />
             <IconButton
               icon={<Icon icon={TrashIcon} />}
-              label={`Delete ${todo.title}`}
+              label={t("@app.item.delete", { title: todo.title })}
               onClick={requestDelete}
               size="sm"
-              tooltip="Delete"
+              tooltip={t("@app.item.deleteTooltip")}
               variant="destructive"
             />
           </HStack>
@@ -224,11 +226,11 @@ export function TodoItem({ onDelete, onRename, onToggleDone, todo }: TodoItemPro
 
       <HStack className="todo-card-metadata" gap={3} wrap="wrap" width="100%">
         <HStack gap={1} wrap="wrap">
-          <Text type="supporting">Created</Text>
+          <Text type="supporting">{t("@app.item.created")}</Text>
           <Timestamp hasTooltip isLive value={todo.createdAt} />
         </HStack>
         <HStack gap={1} wrap="wrap">
-          <Text type="supporting">Updated</Text>
+          <Text type="supporting">{t("@app.item.updated")}</Text>
           <Timestamp hasTooltip isLive value={todo.updatedAt} />
         </HStack>
       </HStack>

@@ -6,23 +6,12 @@ import { Selector } from "@astryxdesign/core/Selector";
 import { StackItem } from "@astryxdesign/core/Stack";
 import { TextInput } from "@astryxdesign/core/TextInput";
 import { ToggleButton, ToggleButtonGroup } from "@astryxdesign/core/ToggleButton";
+import { useTranslator } from "@astryxdesign/core/i18n";
 import {
   getTodoTitleValidationMessage,
   type TodoFilterMode,
   type TodoSortMode,
 } from "./todos";
-
-const FILTER_OPTIONS: Array<{ value: TodoFilterMode; label: string }> = [
-  { value: "all", label: "All" },
-  { value: "open", label: "Open" },
-  { value: "closed", label: "Closed" },
-];
-
-const SORT_OPTIONS: Array<{ value: TodoSortMode; label: string }> = [
-  { value: "newest", label: "Newest created" },
-  { value: "oldest", label: "Oldest created" },
-  { value: "updated", label: "Recently updated" },
-];
 
 type TodoControlsProps = {
   filterMode: TodoFilterMode;
@@ -39,14 +28,27 @@ export function TodoControls({
   onSortChange,
   sortMode,
 }: TodoControlsProps) {
+  const t = useTranslator();
   const [draftTitle, setDraftTitle] = useState("");
   const [draftError, setDraftError] = useState<string | null>(null);
   const createInputRef = useRef<HTMLInputElement>(null);
 
+  const filterOptions: Array<{ value: TodoFilterMode; label: string }> = [
+    { value: "all", label: t("@app.controls.filter.all") },
+    { value: "open", label: t("@app.controls.filter.open") },
+    { value: "closed", label: t("@app.controls.filter.closed") },
+  ];
+
+  const sortOptions: Array<{ value: TodoSortMode; label: string }> = [
+    { value: "newest", label: t("@app.controls.sort.newest") },
+    { value: "oldest", label: t("@app.controls.sort.oldest") },
+    { value: "updated", label: t("@app.controls.sort.updated") },
+  ];
+
   function handleAddTodo(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const validationMessage = getTodoTitleValidationMessage(draftTitle);
+    const validationMessage = getTodoTitleValidationMessage(draftTitle, t);
 
     if (validationMessage) {
       setDraftError(validationMessage);
@@ -68,27 +70,27 @@ export function TodoControls({
               <TextInput
                 hasClear
                 isLabelHidden
-                label="New todo"
+                label={t("@app.controls.newTodoLabel")}
                 onChange={(value) => {
                   setDraftTitle(value);
                   if (draftError) {
                     setDraftError(null);
                   }
                 }}
-                placeholder="Add a new todo"
+                placeholder={t("@app.controls.newTodoPlaceholder")}
                 ref={createInputRef}
                 status={draftError ? { type: "error", message: draftError } : undefined}
                 value={draftTitle}
               />
             </StackItem>
-            <Button label="Add todo" type="submit" variant="primary" />
+            <Button label={t("@app.controls.addTodo")} type="submit" variant="primary" />
           </HStack>
         </form>
       </StackItem>
 
       <HStack gap={2} vAlign="end" wrap="wrap">
         <ToggleButtonGroup
-          label="Filter todos"
+          label={t("@app.controls.filterLabel")}
           onChange={(value) => {
             if (typeof value === "string") {
               onFilterChange(value as TodoFilterMode);
@@ -97,7 +99,7 @@ export function TodoControls({
           type="single"
           value={filterMode}
         >
-          {FILTER_OPTIONS.map((filterOption) => (
+          {filterOptions.map((filterOption) => (
             <ToggleButton
               key={filterOption.value}
               label={filterOption.label}
@@ -110,9 +112,9 @@ export function TodoControls({
 
         <Selector
           isLabelHidden
-          label="Sort todos"
+          label={t("@app.controls.sortLabel")}
           onChange={(value) => onSortChange(value as TodoSortMode)}
-          options={SORT_OPTIONS}
+          options={sortOptions}
           value={sortMode}
         />
       </HStack>

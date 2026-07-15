@@ -1,4 +1,5 @@
 import { Selector } from "@astryxdesign/core/Selector";
+import { useTranslator } from "@astryxdesign/core/i18n";
 import {
   APP_LOCALES,
   LOCALE_LABELS,
@@ -12,11 +13,12 @@ const LOCALE_OPTIONS = APP_LOCALES.map((locale) => ({
 }));
 
 export function LocalePicker() {
+  const t = useTranslator();
   const { locale, setLocale } = useAppLocale();
 
   return (
     <Selector
-      label="Language"
+      label={t("@app.locale.pickerLabel")}
       isLabelHidden
       options={LOCALE_OPTIONS}
       value={locale}

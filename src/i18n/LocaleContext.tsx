@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import { InternationalizationProvider } from "@astryxdesign/core/i18n";
+import enCatalog from "./en.json";
 import frCatalog from "./fr.json";
 
 // Locales this app knows about. `en` is the shipped baseline (no
@@ -76,10 +77,12 @@ export function AppLocaleProvider({
     [locale, setLocaleAndLoad],
   );
 
-  // Assemble the messages map. Only include locales that have loaded
-  // catalogs — the provider is happy to receive a subset.
+  // Assemble the messages map. `en` carries this app's own strings (astryx
+  // itself already ships an `en` catalog, but consumer-namespaced keys need
+  // their own defaults). `fr` and `pseudo` layer on top.
   const messages = useMemo(() => {
     const map: Record<string, Record<string, unknown>> = {
+      en: enCatalog as unknown as Record<string, unknown>,
       fr: frCatalog as unknown as Record<string, unknown>,
     };
     if (pseudoCatalog) {
