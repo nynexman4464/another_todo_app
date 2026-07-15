@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@astryxdesign/cli": "^0.1.6",
-    "@astryxdesign/core": "^0.1.6",
+    "@astryxdesign/core": "file:.local-pkgs/i18n-branch/astryxdesign-core-0.1.6.tgz",
     "@astryxdesign/theme-neutral": "^0.1.6",
     "@astryxdesign/theme-y2k": "^0.1.6",
     "react": "^19.2.7",
