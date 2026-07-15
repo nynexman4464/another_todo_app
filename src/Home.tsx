@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Heading } from "@astryxdesign/core/Heading";
+import { StackItem } from "@astryxdesign/core/Stack";
 import { Text } from "@astryxdesign/core/Text";
 import { VStack } from "@astryxdesign/core/VStack";
 import { TodoControls } from "./TodoControls";
 import { TodoList } from "./TodoList";
+import { TodoPowerSearch } from "./TodoPowerSearch";
 import {
   getVisibleTodos,
   type TodoFilterMode,
@@ -15,9 +17,23 @@ export const Home = () => {
   const [todos, dispatch] = useTodoState();
   const [filterMode, setFilterMode] = useState<TodoFilterMode>("all");
   const [sortMode, setSortMode] = useState<TodoSortMode>("newest");
+  const [matchingIds, setMatchingIds] = useState<ReadonlySet<string> | null>(
+    null,
+  );
 
-  const visibleTodos = getVisibleTodos(todos, filterMode, sortMode);
+  const filteredTodos = getVisibleTodos(todos, filterMode, sortMode);
+  const visibleTodos =
+    matchingIds === null
+      ? filteredTodos
+      : filteredTodos.filter((todo) => matchingIds.has(todo.id));
   const openCount = todos.filter((todo) => !todo.isDone).length;
+
+  const handleResultsChange = useCallback(
+    (nextMatchingIds: ReadonlySet<string>) => {
+      setMatchingIds(nextMatchingIds);
+    },
+    [],
+  );
 
   return (
     <VStack as="section" gap={5} hAlign="start">
@@ -30,6 +46,10 @@ export const Home = () => {
           {openCount} open of {todos.length} total
         </Text>
       </VStack>
+
+      <StackItem crossAlignSelf="stretch">
+        <TodoPowerSearch todos={todos} onResultsChange={handleResultsChange} />
+      </StackItem>
 
       <TodoControls
         filterMode={filterMode}
