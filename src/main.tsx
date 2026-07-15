@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import { y2kTheme } from "@astryxdesign/theme-y2k/built";
 import { Theme } from "@astryxdesign/core";
+import { AppLocaleProvider } from "./i18n/LocaleContext";
 import "./index.css";
 import "@astryxdesign/theme-y2k/theme.css";
 
@@ -11,7 +12,9 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Theme theme={y2kTheme}>
-        <App />
+        <AppLocaleProvider>
+          <App />
+        </AppLocaleProvider>
       </Theme>
     </BrowserRouter>
   </StrictMode>

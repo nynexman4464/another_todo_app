@@ -10,6 +10,7 @@ import { TopNav, TopNavHeading } from "@astryxdesign/core/TopNav";
 import { VStack } from "@astryxdesign/core/VStack";
 import { Home } from "./Home";
 import { About } from "./About";
+import { LocalePicker } from "./i18n/LocalePicker";
 
 type RouterLinkProps = Omit<LinkProps, "to"> & {
   href?: string;
@@ -36,6 +37,7 @@ function App() {
           logo={<NavIcon icon={<Icon icon="check" />} />}
         />
       }
+      endContent={<LocalePicker />}
     />
   );
 
