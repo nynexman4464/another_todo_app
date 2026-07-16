@@ -5,6 +5,7 @@
   "@app.nav.sectionMore": { "defaultMessage": "More" },
   "@app.nav.home": { "defaultMessage": "Home" },
   "@app.nav.about": { "defaultMessage": "About" },
+  "@app.nav.pricing": { "defaultMessage": "Pricing" },
   "@app.locale.pickerLabel": { "defaultMessage": "Language" },
 
   "@app.home.heading": { "defaultMessage": "Todos" },

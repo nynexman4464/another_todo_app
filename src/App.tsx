@@ -11,6 +11,7 @@ import { VStack } from "@astryxdesign/core/VStack";
 import { useTranslator } from "@astryxdesign/core/i18n";
 import { Home } from "./Home";
 import { About } from "./About";
+import { Pricing } from "./Pricing";
 import { LocalePicker } from "./i18n/LocalePicker";
 
 type RouterLinkProps = Omit<LinkProps, "to"> & {
@@ -27,6 +28,7 @@ function App() {
 
   const homeNavItem = { href: "/", label: t("@app.nav.home"), icon: "check" } as const;
   const aboutNavItem = { href: "/about", label: t("@app.nav.about"), icon: "info" } as const;
+  const pricingNavItem = { href: "/pricing", label: t("@app.nav.pricing"), icon: "star" } as const;
 
   const topNav = (
     <TopNav
@@ -59,6 +61,14 @@ function App() {
         <SideNavSection title={t("@app.nav.sectionMore")} isHeaderHidden>
           <SideNavItem
             as={RouterLink}
+            href={pricingNavItem.href}
+            icon={pricingNavItem.icon}
+            isSelected={pathname === pricingNavItem.href}
+            label={pricingNavItem.label}
+            selectedIcon={pricingNavItem.icon}
+          />
+          <SideNavItem
+            as={RouterLink}
             href={aboutNavItem.href}
             icon={aboutNavItem.icon}
             isSelected={pathname === aboutNavItem.href}
@@ -74,6 +84,7 @@ function App() {
     <AppShell contentPadding={6} sideNav={sideNav} topNav={topNav} variant="elevated">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/pricing" element={<Pricing />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </AppShell>

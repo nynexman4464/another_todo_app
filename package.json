@@ -16,6 +16,7 @@
     "@astryxdesign/theme-y2k": "^0.1.6",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-intl": "^10.1.17",
     "react-router-dom": "^7.18.0"
   },
   "devDependencies": {

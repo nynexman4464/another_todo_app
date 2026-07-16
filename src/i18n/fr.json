@@ -3,6 +3,10 @@
   "@astryx.appShell.mobileNavigation": { "defaultMessage": "Navigation mobile" },
   "@astryx.topNav.landmarkLabel": { "defaultMessage": "Navigation principale" },
 
+  "@astryx.selector.placeholder": { "defaultMessage": "Sélectionner…" },
+  "@astryx.selector.searchPlaceholder": { "defaultMessage": "Rechercher…" },
+  "@astryx.selector.searchOptions": { "defaultMessage": "Rechercher parmi les options" },
+
   "@astryx.powersearch.label": { "defaultMessage": "Rechercher" },
   "@astryx.powersearch.placeholder": { "defaultMessage": "Rechercher…" },
   "@astryx.powersearch.resultCount": { "defaultMessage": "{count, number} {count, plural, one {résultat} other {résultats}}" },
@@ -63,6 +67,7 @@
   "@app.nav.sectionMore": { "defaultMessage": "Plus" },
   "@app.nav.home": { "defaultMessage": "Accueil" },
   "@app.nav.about": { "defaultMessage": "À propos" },
+  "@app.nav.pricing": { "defaultMessage": "Tarifs" },
   "@app.locale.pickerLabel": { "defaultMessage": "Langue" },
 
   "@app.home.heading": { "defaultMessage": "Tâches" },
