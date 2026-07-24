@@ -2,20 +2,18 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
-import { y2kTheme } from "@astryxdesign/theme-y2k/built";
-import { Theme } from "@astryxdesign/core";
+import { AppThemeProvider } from "./theme/ThemeContext";
 import { AppLocaleProvider } from "./i18n/LocaleContext";
 import "./index.css";
-import "@astryxdesign/theme-y2k/theme.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <Theme theme={y2kTheme}>
+      <AppThemeProvider>
         <AppLocaleProvider>
           <App />
         </AppLocaleProvider>
-      </Theme>
+      </AppThemeProvider>
     </BrowserRouter>
   </StrictMode>
 );

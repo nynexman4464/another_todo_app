@@ -72,7 +72,7 @@ type Region = "na" | "eu" | "uk" | "apac";
 // <InternationalizationProvider>.
 function PricingBody() {
   const intl = useIntl();
-  const [region, setRegion] = useState<Region>("na");
+  const [region, setRegion] = useState<Region | null>(null);
 
   const regionOptions = [
     {value: "na", label: intl.formatMessage({id: "pricing.region.na"})},
@@ -104,7 +104,7 @@ function PricingBody() {
           label={intl.formatMessage({id: "pricing.region.label"})}
           options={regionOptions}
           value={region}
-          onChange={(value) => setRegion(value as Region)}
+          onChange={(value) => setRegion(value as Region | null)}
           hasSearch
           hasClear
         />

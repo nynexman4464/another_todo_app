@@ -7,6 +7,8 @@
   "@app.nav.about": { "defaultMessage": "About" },
   "@app.nav.pricing": { "defaultMessage": "Pricing" },
   "@app.locale.pickerLabel": { "defaultMessage": "Language" },
+  "@app.theme.pickerLabel": { "defaultMessage": "Theme" },
+  "@app.banner.testApp": { "defaultMessage": "Warning: test app" },
 
   "@app.home.heading": { "defaultMessage": "Todos" },
   "@app.home.subtitle": { "defaultMessage": "Track open work, update it inline, and filter the list without leaving the page." },

@@ -69,6 +69,8 @@
   "@app.nav.about": { "defaultMessage": "À propos" },
   "@app.nav.pricing": { "defaultMessage": "Tarifs" },
   "@app.locale.pickerLabel": { "defaultMessage": "Langue" },
+  "@app.theme.pickerLabel": { "defaultMessage": "Thème" },
+  "@app.banner.testApp": { "defaultMessage": "Avertissement : application de test" },
 
   "@app.home.heading": { "defaultMessage": "Tâches" },
   "@app.home.subtitle": { "defaultMessage": "Suivez le travail en cours, mettez-le à jour en place, et filtrez la liste sans quitter la page." },

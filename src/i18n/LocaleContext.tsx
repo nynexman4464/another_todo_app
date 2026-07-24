@@ -7,18 +7,20 @@ import {
   type ReactNode,
 } from "react";
 import { InternationalizationProvider } from "@astryxdesign/core/i18n";
+import arCatalog from "./ar.json";
 import enCatalog from "./en.json";
 import frCatalog from "./fr.json";
 
 // Locales this app knows about. `en` is the shipped baseline (no
-// override needed). `pseudo` is the astryx-generated pseudo-locale bundled
+// override needed). `ar` exercises RTL direction. `pseudo` is the astryx-generated pseudo-locale bundled
 // in @astryxdesign/core/locales/pseudo.json (for smoke-testing that every
 // string flows through i18n). `fr` is the app-provided French catalog.
-export const APP_LOCALES = ["en", "fr", "pseudo"] as const;
+export const APP_LOCALES = ["en", "ar", "fr", "pseudo"] as const;
 export type AppLocale = (typeof APP_LOCALES)[number];
 
 export const LOCALE_LABELS: Record<AppLocale, string> = {
   en: "English",
+  ar: "العربية",
   fr: "Français",
   pseudo: "Pseudo (⟦…⟧)",
 };
@@ -79,9 +81,10 @@ export function AppLocaleProvider({
 
   // Assemble the messages map. `en` carries this app's own strings (astryx
   // itself already ships an `en` catalog, but consumer-namespaced keys need
-  // their own defaults). `fr` and `pseudo` layer on top.
+  // their own defaults). `ar`, `fr`, and `pseudo` layer on top.
   const messages = useMemo(() => {
     const map: Record<string, Record<string, unknown>> = {
+      ar: arCatalog as unknown as Record<string, unknown>,
       en: enCatalog as unknown as Record<string, unknown>,
       fr: frCatalog as unknown as Record<string, unknown>,
     };
