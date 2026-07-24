@@ -6,7 +6,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { InternationalizationProvider } from "@astryxdesign/core/i18n";
+import {
+  InternationalizationProvider,
+  type Catalog,
+  type MessagesByLocale,
+} from "@astryxdesign/core/i18n";
 import arCatalog from "./ar.json";
 import enCatalog from "./en.json";
 import frCatalog from "./fr.json";
@@ -47,12 +51,12 @@ type AppLocaleProviderProps = {
 
 // Loaded lazily so we don't ship the pseudo bundle to production users.
 // Vite's dynamic import returns a namespace with `.default` for JSON.
-let pseudoCatalogPromise: Promise<Record<string, unknown>> | null = null;
+let pseudoCatalogPromise: Promise<Catalog> | null = null;
 function loadPseudoCatalog() {
   if (!pseudoCatalogPromise) {
     pseudoCatalogPromise = import(
       "@astryxdesign/core/locales/pseudo.json"
-    ).then((mod) => (mod as { default: Record<string, unknown> }).default);
+    ).then((mod) => (mod as { default: Catalog }).default);
   }
   return pseudoCatalogPromise;
 }
@@ -62,10 +66,7 @@ export function AppLocaleProvider({
   initialLocale = "en",
 }: AppLocaleProviderProps) {
   const [locale, setLocale] = useState<AppLocale>(initialLocale);
-  const [pseudoCatalog, setPseudoCatalog] = useState<Record<
-    string,
-    unknown
-  > | null>(null);
+  const [pseudoCatalog, setPseudoCatalog] = useState<Catalog | null>(null);
 
   const setLocaleAndLoad = useCallback((nextLocale: AppLocale) => {
     if (nextLocale === "pseudo" && !pseudoCatalog) {
@@ -83,10 +84,10 @@ export function AppLocaleProvider({
   // itself already ships an `en` catalog, but consumer-namespaced keys need
   // their own defaults). `ar`, `fr`, and `pseudo` layer on top.
   const messages = useMemo(() => {
-    const map: Record<string, Record<string, unknown>> = {
-      ar: arCatalog as unknown as Record<string, unknown>,
-      en: enCatalog as unknown as Record<string, unknown>,
-      fr: frCatalog as unknown as Record<string, unknown>,
+    const map: MessagesByLocale = {
+      ar: arCatalog,
+      en: enCatalog,
+      fr: frCatalog,
     };
     if (pseudoCatalog) {
       map.pseudo = pseudoCatalog;
@@ -98,8 +99,7 @@ export function AppLocaleProvider({
     <LocaleContext.Provider value={value}>
       <InternationalizationProvider
         locale={locale}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        messages={messages as any}
+        messages={messages}
       >
         {children}
       </InternationalizationProvider>
