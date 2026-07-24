@@ -2,42 +2,32 @@
 
 Project-specific guidance for AI coding agents.
 
-<!-- XDS:START -->
-Astryx v0.1.0 — 148 components
+<!-- ASTRYX:START -->
+Astryx v0.1.6 · 149 components
+CLI: run every command as `npx astryx <cmd>` (shown below as `astryx ...`).
 
-Before writing any UI code:
-1. `npx astryx template --list` — find a related page pattern
-2. `npx astryx template <name> --skeleton` — study layout structure (gap, padding, nesting)
-3. `npx astryx component <Name>` — read props + examples for EVERY component you use
+SETUP (once, in your app entry e.g. main.tsx) — without these, components render unstyled:
+  import "@astryxdesign/core/reset.css";
+  import "@astryxdesign/core/astryx.css";
 
-Templates are reference code — read them for composition patterns, not just scaffolding.
-Full pages → dashboard (uses AppShell). Forms → contact-form. Tables → data-table. Settings → settings-sidebar.
+WORKFLOW — discover, don't guess. Before writing UI:
+1. `astryx build "<idea>"` — START HERE: returns a kit (closest [page] + [block]s + [component]s). No args = full playbook.
+2. `astryx template <name> [--skeleton]` — scaffold the [page]/[block]s it named, or study their layout. Templates are reference code.
+3. `astryx component <Name>` — props + examples for every component you use.
 
-No <div> anywhere — not for layout, not for wrappers, not for spacing. Use components.
-Full-page shells → AppShell (not Layout). Sidebar nav → SideNav (not List).
-No style={{}} — use the xstyle prop on components for custom styling.
-If a component prop does what you need, use it — never replicate with CSS/stylex.
-No magic values — run `npx astryx docs tokens` for spacing/color/radius.
-To change accent/brand colors: `npx astryx theme` — never override --astryx-color-* in :root.
+RULES:
+- No <div> — components do all layout/spacing. Full page → AppShell; sidebar nav → SideNav.
+- Frame first: pick the shell (AppShell / Layout+LayoutPanel) and budget regions in px BEFORE writing content (`astryx docs layout`).
+- Dense data = rows (Table, List/Item) edge-to-edge — never Card-wrapped list items. Card = dashboard widgets, galleries, settings groups only.
+- Status → StatusDot/Token; Badge only for counts and enumerated states, never decoration.
+- Custom styling: component props first; else style/className with tokens — var(--color-*|--spacing-*|--radius-*). No raw hex/px. (No StyleX/Tailwind compiler here — don't use xstyle/utility classes.)
+- Tokens for every value (`astryx docs tokens`). Brand/accent via `astryx theme` — never override --color-* in :root.
 
-npx astryx component --list         148 components by category
-npx astryx component <Name>         props, types, examples
-npx astryx docs color                Semantic color tokens for surfaces, text, icons...
-npx astryx docs elevation            Shadow tokens for visual elevation and inset st...
-npx astryx docs icons                Semantic icon names available in the design sys...
-npx astryx docs illustrations        Illustration guidelines for empty states, onboa...
-npx astryx docs migration            How to migrate an existing Tailwind, shadcn, or...
-npx astryx docs motion               Duration and easing tokens for animations and t...
-npx astryx docs principles           Core design principles and rules for building w...
-npx astryx docs shape                Border radius tokens for consistent component r...
-npx astryx docs spacing              Spacing scale tokens for padding, gap, and marg...
-npx astryx docs styling              How to customize component appearance: xstyle p...
-npx astryx docs theme                Theme provider, custom themes, theme build for ...
-npx astryx docs tokens               tokens
-npx astryx docs typography           Font families, geometric type scale, weight, li...
-npx astryx template --list           page recipes with component lists
-npx astryx template <name> [path]     scaffold from template
-npx astryx swizzle <Name>            eject source (--gap to report why)
-npx astryx upgrade --apply            codemods after version bump
-after @astryxdesign/core bump, always run npx astryx upgrade --apply
-<!-- XDS:END -->
+MORE CLI:
+  search "<query>"   find any component / hook / doc / template / block
+  component --list   149 components by category
+  template --list    page + block recipes
+  docs <topic>       color, elevation, icons, illustrations, layout, migration, motion, principles, shape, spacing, styling, theme, tokens, typography
+  swizzle <Name>     eject component source for deep customization
+  upgrade --apply    run after any @astryxdesign/core bump
+<!-- ASTRYX:END -->

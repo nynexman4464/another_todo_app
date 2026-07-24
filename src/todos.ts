@@ -68,9 +68,12 @@ export function useTodoState(initialTodos: Todo[] = []) {
   return useReducer(todoReducer, initialTodos);
 }
 
-export function getTodoTitleValidationMessage(title: string) {
+export function getTodoTitleValidationMessage(
+  title: string,
+  t: (key: string, values?: Record<string, string | number>) => string,
+) {
   if (!title.trim()) {
-    return "Todo titles cannot be blank.";
+    return t("@app.validation.blankTitle");
   }
 
   return null;

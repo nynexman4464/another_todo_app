@@ -1,6 +1,7 @@
 import { Heading } from "@astryxdesign/core/Heading";
 import { Text } from "@astryxdesign/core/Text";
 import { VStack } from "@astryxdesign/core/VStack";
+import { useTranslator } from "@astryxdesign/core/i18n";
 import { TodoItem } from "./TodoItem";
 import type { Todo } from "./todos";
 
@@ -19,12 +20,14 @@ export function TodoList({
   todos,
   visibleTodos,
 }: TodoListProps) {
+  const t = useTranslator();
+
   if (todos.length === 0) {
     return (
       <VStack gap={1}>
-        <Heading level={2}>No todos yet</Heading>
+        <Heading level={2}>{t("@app.list.emptyHeading")}</Heading>
         <Text as="p" color="secondary">
-          Add your first item above to start tracking work.
+          {t("@app.list.emptyBody")}
         </Text>
       </VStack>
     );
@@ -33,9 +36,9 @@ export function TodoList({
   if (visibleTodos.length === 0) {
     return (
       <VStack gap={1}>
-        <Heading level={2}>Nothing matches this filter</Heading>
+        <Heading level={2}>{t("@app.list.noMatchHeading")}</Heading>
         <Text as="p" color="secondary">
-          Switch the filter or add a new todo.
+          {t("@app.list.noMatchBody")}
         </Text>
       </VStack>
     );
